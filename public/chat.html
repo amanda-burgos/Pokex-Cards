@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav-principal">
+    <div class="nav-links">
+      <span class="pokebola"></span>
+      <a href="/index.html">Catalogo</a>
+      <a href="/sobre-aleatorio.html">Sobre Sorpresa</a>
+      <a href="/inventario.html">Inventario</a>
+      <a href="/pokedex.html">Pokedex</a>
+      <a href="/chat.html">Chat</a>
+    </div>
+    <div id="nav-usuario"></div>
+  </nav>
+
+  <h1>Asistente de Entrenador Pokemon</h1>
+  <div id="chat-lista" class="chat-lista"></div>
+  <div id="chat-bandeja" class="chat-bandeja" hidden>
+    <span id="chat-bandeja-info"></span>
+    <div>
+      <button id="chat-bandeja-comprar" type="button" disabled>Comprar estas cartas</button>
+      <button id="chat-bandeja-limpiar" type="button" class="chat-bandeja-limpiar">Limpiar</button>
+    </div>
+  </div>
+  <form id="chat-form" class="chat-form">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." autocomplete="off" required />
+    <button id="chat-enviar" type="submit">Enviar</button>
+  </form>
+
+  <script src="nav.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sobre comprado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav-principal">
+    <div class="nav-links">
+      <span class="pokebola"></span>
+      <a href="/index.html">Catalogo</a>
+      <a href="/sobre-aleatorio.html">Sobre Sorpresa</a>
+      <a href="/inventario.html">Inventario</a>
+      <a href="/pokedex.html">Pokedex</a>
+    </div>
+    <div id="nav-usuario"></div>
+  </nav>
+
+  <h1>Gracias por tu compra</h1>
+  <p id="estado">Consultando estado del sobre...</p>
+  <p>
+    <a href="/pokedex.html">Ver mi Pokedex</a> ·
+    <a href="/inventario.html">Ver mi Inventario</a> ·
+    <a href="/index.html">Comprar otro sobre</a>
+  </p>
+
+  <script src="nav.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const sobreId = params.get("sobre");
+    const estadoEl = document.getElementById("estado");
+
+    async function consultarEstado(intentos = 0) {
+      const res = await fetch(`/api/sobre/${sobreId}`);
+      const sobre = await res.json();
+
+      if (sobre.estado === "pagado") {
+        const destino = sobre.tipo === "aleatorio" ? "tu Inventario" : "tu Pokedex";
+        estadoEl.textContent = `Sobre #${sobreId} confirmado como PAGADO. Total: $${(sobre.total_centavos / 100).toFixed(2)}. Revisa ${destino}.`;
+      } else if (intentos < 5) {
+        estadoEl.textContent = `Sobre #${sobreId} sigue como "${sobre.estado}" (esperando confirmación del webhook)...`;
+        setTimeout(() => consultarEstado(intentos + 1), 1500);
+      } else {
+        estadoEl.textContent = `Sobre #${sobreId} sigue "${sobre.estado}". Revisa que el webhook de Stripe este corriendo (stripe listen).`;
+      }
+    }
+
+    (async () => {
+      await initNav();
+      if (sobreId) consultarEstado();
+    })();
+  </script>
+</body>
+</html>

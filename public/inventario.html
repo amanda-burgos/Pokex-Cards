@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inventario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav-principal">
+    <div class="nav-links">
+      <span class="pokebola"></span>
+      <a href="/index.html">Catalogo</a>
+      <a href="/sobre-aleatorio.html">Sobre Sorpresa</a>
+      <a href="/inventario.html">Inventario</a>
+      <a href="/pokedex.html">Pokedex</a>
+      <a href="/chat.html">Chat</a>
+    </div>
+    <div id="nav-usuario"></div>
+  </nav>
+
+  <h1>Inventario</h1>
+  <p>Cartas de tus Sobres Sorpresa. Selecciona 3 para reclamarlas en tu Pokedex, o vende cualquiera por la mitad de su precio.</p>
+  <p id="seleccion-info">Seleccionadas para reclamar: 0 / 3</p>
+  <p id="mensaje" class="mensaje"></p>
+  <div id="inventario" class="grid"></div>
+  <button id="reclamar" disabled>Reclamar 3 seleccionadas</button>
+
+  <script src="nav.js"></script>
+  <script src="inventario.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sobre Sorpresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav-principal">
+    <div class="nav-links">
+      <span class="pokebola"></span>
+      <a href="/index.html">Catalogo</a>
+      <a href="/sobre-aleatorio.html">Sobre Sorpresa</a>
+      <a href="/inventario.html">Inventario</a>
+      <a href="/pokedex.html">Pokedex</a>
+      <a href="/chat.html">Chat</a>
+    </div>
+    <div id="nav-usuario"></div>
+  </nav>
+
+  <h1>Sobre Sorpresa</h1>
+  <p>
+    Compra sobres a un precio fijo y mas bajo que elegir tus cartas directamente,
+    pero no sabes que te va a tocar hasta que los abres. Las 3 cartas de cada sobre
+    van a tu <strong>Inventario</strong>, desde donde puedes reclamar 3 para tu Pokedex
+    o vender las que no quieras por la mitad de su precio.
+  </p>
+  <p id="precio-info"></p>
+  <div class="filtros">
+    <label for="cantidad">Cantidad de sobres:</label>
+    <input type="number" id="cantidad" value="1" min="1" max="10" />
+  </div>
+  <p id="total-info"></p>
+  <p id="mensaje" class="mensaje"></p>
+  <button id="comprar">Comprar Sobre Sorpresa</button>
+
+  <script src="nav.js"></script>
+  <script src="sobre-aleatorio.js"></script>
+</body>
+</html>

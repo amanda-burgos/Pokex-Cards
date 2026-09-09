@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Entrenador Pokemon - Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1><span class="pokebola"></span> Entrenador Pokemon</h1>
+
+  <div class="tarjeta-form">
+    <h2>Iniciar sesion</h2>
+    <form id="form-login">
+      <input type="text" id="login-username" placeholder="Usuario" required />
+      <input type="password" id="login-password" placeholder="Contraseña" required />
+      <button type="submit">Entrar</button>
+    </form>
+    <p id="login-mensaje" class="mensaje"></p>
+  </div>
+
+  <div class="tarjeta-form">
+    <h2>Crear cuenta</h2>
+    <form id="form-registro">
+      <input type="text" id="registro-username" placeholder="Usuario" required />
+      <input type="email" id="registro-email" placeholder="Email" required />
+      <input type="password" id="registro-password" placeholder="Contraseña (min 4 caracteres)" required />
+      <button type="submit">Crear cuenta</button>
+    </form>
+    <p id="registro-mensaje" class="mensaje"></p>
+  </div>
+
+  <script>
+    document.getElementById("form-login").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("login-username").value;
+      const password = document.getElementById("login-password").value;
+      const mensajeEl = document.getElementById("login-mensaje");
+
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        mensajeEl.textContent = data.error;
+        return;
+      }
+      window.location.href = "/index.html";
+    });
+
+    document.getElementById("form-registro").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const username = document.getElementById("registro-username").value;
+      const email = document.getElementById("registro-email").value;
+      const password = document.getElementById("registro-password").value;
+      const mensajeEl = document.getElementById("registro-mensaje");
+
+      const res = await fetch("/api/auth/registro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        mensajeEl.textContent = data.error;
+        return;
+      }
+      window.location.href = "/index.html";
+    });
+  </script>
+</body>
+</html>

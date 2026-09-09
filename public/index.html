@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Entrenador Pokemon - Arma tu sobre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav-principal">
+    <div class="nav-links">
+      <span class="pokebola"></span>
+      <a href="/index.html">Catalogo</a>
+      <a href="/sobre-aleatorio.html">Sobre Sorpresa</a>
+      <a href="/inventario.html">Inventario</a>
+      <a href="/pokedex.html">Pokedex</a>
+      <a href="/chat.html">Chat</a>
+    </div>
+    <div id="nav-usuario"></div>
+  </nav>
+
+  <h1>Arma tu sobre (elige 3 cartas)</h1>
+  <div class="filtros">
+    <input type="search" id="buscador" placeholder="Buscar pokemon por nombre o numero..." />
+    <select id="filtro-rareza">
+      <option value="">Todas las rarezas</option>
+    </select>
+  </div>
+  <p id="seleccion-info">Seleccionadas: 0 / 3 — Total: $0.00</p>
+  <p id="mensaje" class="mensaje"></p>
+  <div id="catalogo" class="grid"></div>
+  <div class="paginacion">
+    <button id="pagina-anterior">Anterior</button>
+    <span id="pagina-info"></span>
+    <button id="pagina-siguiente">Siguiente</button>
+  </div>
+  <button id="comprar" disabled>Comprar sobre</button>
+
+  <script src="nav.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
