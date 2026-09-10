@@ -30,7 +30,7 @@ export async function enviarEmailPagoConfirmado({ to, sobre }) {
         <h1>Gracias por tu compra!</h1>
         <p>Tu sobre #${sobre.id} fue pagado exitosamente.</p>
         <p><strong>Total:</strong> $${total}</p>
-        <p>Ya podes revisar tus cartas en tu Pokedex o Inventario.</p>
+        <p>Ya puedes revisar tus cartas en tu Pokedex o Inventario.</p>
       `,
     });
     console.log(`[email] Enviado a ${to} por sobre #${sobre.id}`);
