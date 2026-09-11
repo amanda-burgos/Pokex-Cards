@@ -15,6 +15,10 @@ import chatRoutes from "./src/routes/chat.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// Render (y cualquier PaaS con proxy TLS) requieren esto para que Express
+// reconozca la conexion como https y las cookies "secure" se manden bien.
+app.set("trust proxy", 1);
+
 // El webhook necesita el body crudo para verificar la firma de Stripe,
 // por eso se registra ANTES del express.json() global.
 app.post(
@@ -29,7 +33,11 @@ app.use(
     secret: process.env.SESSION_SECRET || "dev-secret-cambiame",
     resave: false,
     saveUninitialized: false,
-    cookie: { httpOnly: true, sameSite: "lax" },
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
   })
 );
 

@@ -1,6 +1,8 @@
 import Database from "better-sqlite3";
 
-const db = new Database("entrenador.db");
+// DB_PATH permite apuntar al disco persistente en Render (ver render.yaml);
+// en local sin esa variable sigue usando el archivo junto al proyecto.
+const db = new Database(process.env.DB_PATH || "entrenador.db");
 // WAL evita bloqueos si el MCP standalone (mcp-server/stdio.js) corre al
 // mismo tiempo que el servidor Express contra el mismo archivo de sqlite.
 db.pragma("journal_mode = WAL");
