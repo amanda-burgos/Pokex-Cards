@@ -17,8 +17,24 @@ function proveedorActual() {
   return nombre;
 }
 
+// El prompt le pide al modelo que no escriba el link de pago (ya se muestra
+// como boton), pero algunos modelos lo pegan igual. Esto lo garantiza siempre,
+// sin depender de que el LLM obedezca: si una tool devolvio una url y el
+// modelo la repitio en su texto, se quita antes de mandarla al cliente.
+function quitarUrlsDeTools(respuesta, eventos) {
+  let texto = respuesta;
+  for (const evento of eventos) {
+    const url = evento.output?.url;
+    if (url && texto.includes(url)) {
+      texto = texto.split(url).join("");
+    }
+  }
+  return texto.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 export async function chat(args) {
   const nombre = proveedorActual();
   const proveedor = await PROVEEDORES[nombre]();
-  return proveedor.chat(args);
+  const resultado = await proveedor.chat(args);
+  return { ...resultado, respuesta: quitarUrlsDeTools(resultado.respuesta, resultado.eventos) };
 }
