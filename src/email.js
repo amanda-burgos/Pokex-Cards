@@ -1,5 +1,8 @@
 import { Resend } from "resend";
 
+// No llamar estas funciones directo desde rutas/tools: todo email se manda
+// encolandolo en src/queues/emailQueue.js. El unico que importa este archivo
+// es src/queues/emailWorker.js, que es quien de verdad ejecuta el envio.
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;

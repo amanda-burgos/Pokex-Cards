@@ -6,7 +6,7 @@ import {
   obtenerUsuarioPorId,
 } from "./db.js";
 import { elegirAleatorios } from "./pokeapi.js";
-import { enviarEmailPagoConfirmado } from "./email.js";
+import { encolarEmailPagoConfirmado } from "./queues/emailQueue.js";
 
 // Idempotente: si el sobre ya esta pagado (p.ej. el webhook llega dos veces), no hace nada.
 export async function confirmarPago(sobre) {
@@ -25,5 +25,5 @@ export async function confirmarPago(sobre) {
   marcarComoPagado(sobre.id);
 
   const usuario = obtenerUsuarioPorId(sobre.usuario_id);
-  await enviarEmailPagoConfirmado({ to: usuario?.email, sobre });
+  await encolarEmailPagoConfirmado({ to: usuario?.email, sobre });
 }

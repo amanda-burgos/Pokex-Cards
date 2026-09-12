@@ -1,4 +1,9 @@
 services:
+  - type: redis
+    name: entrenador-redis
+    plan: free
+    ipAllowList: []
+
   - type: web
     name: entrenador-pokemon
     runtime: node
@@ -27,3 +32,26 @@ services:
         sync: false
       - key: CLAUDE_CHAT_MODEL
         value: claude-opus-5
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: entrenador-redis
+          property: connectionString
+
+  - type: worker
+    name: entrenador-email-worker
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run worker
+    autoDeploy: true
+    envVars:
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: entrenador-redis
+          property: connectionString
